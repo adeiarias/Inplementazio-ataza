@@ -6,7 +6,6 @@ import weka.core.Instances;
 import weka.core.converters.ConverterUtils;
 import weka.filters.Filter;
 import weka.filters.unsupervised.instance.Randomize;
-import weka.filters.unsupervised.instance.RemovePercentage;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -35,9 +34,22 @@ public class App {
             String emaitza = "/home/adeiarias/Escritorio/output.txt";//output fitxategiaren path-a
             arffFitxategiaKargatu(path);
             datuSortaInformazioa();
-            fitxategiaBete(emaitza,path);
+            fitxategiaPlusCrossValidation(emaitza,path);
             hold_out();
+            ebaluazioEzZintzoa();
         }
+    }
+
+    private static void ebaluazioEzZintzoa() throws Exception {
+        NaiveBayes naive = new NaiveBayes();
+        data.setClassIndex(data.numAttributes()-1);
+        naive.buildClassifier(data);
+
+        Evaluation eval = new Evaluation(data);
+        eval.evaluateModel(naive,data);
+        System.out.println("ACCURACY -> " + eval.pctCorrect());
+        System.out.println("NOT ACCURACY -> " + eval.pctIncorrect());
+        System.out.println("85.7143");
     }
 
     private static void hold_out() throws Exception {
@@ -52,8 +64,8 @@ public class App {
         removePercentage.setInvertSelection(true);
         removePercentage.setPercentage(70);
         Instances train = Filter.useFilter(randomInstances,removePercentage);
-
         Instances test = Filter.useFilter(randomInstances,removePercentage);*/
+
         int trainSize = (int) Math.round(randomInstances.numInstances() * 70 / 100);
         int testSize = randomInstances.numInstances() - trainSize;
         Instances train = new Instances(randomInstances, 0, trainSize);
@@ -62,17 +74,17 @@ public class App {
         NaiveBayes naive = new NaiveBayes();
         train.setClassIndex(train.numAttributes()-1);
         naive.buildClassifier(train);
-        System.out.println("train -> " + train.numInstances());
+       /* System.out.println("train -> " + train.numInstances());
         System.out.println("test -> " + test.numInstances());
-
+*/
         Evaluation eval = new Evaluation(data);
         eval.evaluateModel(naive,test);
-        System.out.println("ACCURACY -> " + eval.pctCorrect());
+       /* System.out.println("ACCURACY -> " + eval.pctCorrect());
         System.out.println("NOT ACCURACY -> " + eval.pctIncorrect());
-        System.out.println("85.7143");
+        System.out.println("85.7143");*/
     }
 
-    private static void fitxategiaBete(String emaitza, String path) throws Exception {
+    private static void fitxategiaPlusCrossValidation(String emaitza, String path) throws Exception {
         //NaiveBayes entrenatu
         NaiveBayes naiveBayes = new NaiveBayes();
         data.setClassIndex(data.numAttributes()-1);
