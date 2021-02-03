@@ -3,14 +3,16 @@ package WEKA;
 import weka.classifiers.Evaluation;
 import weka.classifiers.bayes.NaiveBayes;
 import weka.core.Instances;
+import weka.core.converters.ArffSaver;
+import weka.core.converters.CSVLoader;
 import weka.core.converters.ConverterUtils;
 import weka.filters.Filter;
 import weka.filters.unsupervised.instance.Randomize;
 
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class App {
@@ -22,7 +24,7 @@ public class App {
     private static NaiveBayes naiveBayes = new NaiveBayes();
 
     public static void main(String[] args) throws Exception {
-        if(args.length == 2){//Ez dira behar den parametro kopurua eman
+        /*if(args.length == 2){//Ez dira behar den parametro kopurua eman
             String erroreMezua = "\njava -jar estimateNaiveBayes5fCV.jar\n" +
                     "Helburua: emandako datuekin Naive Bayes-en kalitatearen estimazioa lortu 5-fCV eskemaren bidez eta datuei buruzko informazioa eman\n" +
                     "Argumentuak:\n" +
@@ -37,8 +39,17 @@ public class App {
             fitxategiaPlusCrossValidation(emaitza,path);
             hold_out();
             ebaluazioEzZintzoa();
-        }
+        }*/
+        CSVLoader loader = new CSVLoader();
+        loader.setSource(new File("/home/adeiarias/Escritorio/trainCorregido.csv"));
+        Instances d = loader.getDataSet();
+
+        ArffSaver saver = new ArffSaver();
+        saver.setInstances(d);
+        saver.setFile(new File("/home/adeiarias/Escritorio/train.arff"));
+        saver.writeBatch();
     }
+
 
     private static void ebaluazioEzZintzoa() throws Exception {
         NaiveBayes naive = new NaiveBayes();
@@ -107,6 +118,7 @@ public class App {
 
     private static void datuSortaInformazioa() {
         System.out.println("\nDATU SORTARI BURUZKO INFORMAZIOA:");
+        System.out.println("KLASE MINORITARIOA -> " + data);
         System.out.println("Instantzia kopurua -> " + data.numInstances());
         System.out.println("Atributu kopurua -> " + data.numAttributes());
         System.out.println("Lehenengo atributuak har ditzakeen balio ezberdinak -> " + data.numDistinctValues(0));
