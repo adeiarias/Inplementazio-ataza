@@ -43,7 +43,5 @@ public class Cositas {
         Evaluation eval = new Evaluation(train);
         eval.evaluateModel(naive,test);
         System.out.println(eval.pctCorrect());
-
-
     }
 }
