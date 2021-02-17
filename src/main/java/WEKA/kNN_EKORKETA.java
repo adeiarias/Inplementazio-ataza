@@ -21,6 +21,36 @@ public class kNN_EKORKETA {
         parametroGuztienEkorketa(kEstimatu);
     }
 
+
+
+    private static void datuak_Kargatu(String path) throws Exception {
+        ConverterUtils.DataSource source = new ConverterUtils.DataSource(path);
+        data = source.getDataSet();
+        if(data.classIndex() == -1) data.setClassIndex(data.numAttributes()-1);
+    }
+
+
+
+    private static void K_Parametroaren_Ekorketa(int kEstimatu) throws Exception {
+        double maxMeasure = 0.0;
+        int k = 1;
+        for(int i=1; i<=kEstimatu; i++) {
+            IBk knn = new IBk();
+            knn.buildClassifier(data);
+            knn.setKNN(i);
+
+            Evaluation evaluation = new Evaluation(data);
+            evaluation.crossValidateModel(knn,data,10,new Random(1));
+            if(evaluation.weightedFMeasure() > maxMeasure) {
+                maxMeasure = evaluation.weightedFMeasure();
+                k=i;
+            }
+        }
+        System.out.println("\nEMAITZA -> " + maxMeasure + " ETA K -> " + k+"\n");
+    }
+
+
+
     private static void parametroGuztienEkorketa(int kEstimatu) throws Exception {
         hashMapakHasieratu();
         LinearNNSearch[] distantziak = distantziakLortu();
@@ -106,27 +136,7 @@ public class kNN_EKORKETA {
         return dist;
     }
 
-    private static void K_Parametroaren_Ekorketa(int kEstimatu) throws Exception {
-        double maxMeasure = 0.0;
-        int k = 1;
-        for(int i=1; i<=kEstimatu; i++) {
-            IBk knn = new IBk();
-            knn.buildClassifier(data);
-            knn.setKNN(i);
 
-            Evaluation evaluation = new Evaluation(data);
-            evaluation.crossValidateModel(knn,data,10,new Random(1));
-            if(evaluation.weightedFMeasure() > maxMeasure) {
-                maxMeasure = evaluation.weightedFMeasure();
-                k=i;
-            }
-        }
-        System.out.println("\nEMAITZA -> " + maxMeasure + " ETA K -> " + k+"\n");
-    }
 
-    private static void datuak_Kargatu(String path) throws Exception {
-        ConverterUtils.DataSource source = new ConverterUtils.DataSource(path);
-        data = source.getDataSet();
-        if(data.classIndex() == -1) data.setClassIndex(data.numAttributes()-1);
-    }
+
 }
