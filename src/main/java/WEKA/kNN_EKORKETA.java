@@ -17,7 +17,7 @@ public class kNN_EKORKETA {
     public static void main(String[] args) throws Exception {
         int kEstimatu = Integer.parseInt("20");
         datuak_Kargatu("/home/adeiarias/Escritorio/3.MAILA/2.LAUHILABETEA/WEKA/LABORATEGIAK/3.PRAKTIKA/datuak/neutrons.arff");
-        //K_Parametroaren_Ekorketa(kEstimatu);
+        K_Parametroaren_Ekorketa(kEstimatu);
         parametroGuztienEkorketa(kEstimatu);
     }
 
@@ -116,13 +116,12 @@ public class kNN_EKORKETA {
 
             Evaluation evaluation = new Evaluation(data);
             evaluation.crossValidateModel(knn,data,10,new Random(1));
-            System.out.println(evaluation.weightedFMeasure());
             if(evaluation.weightedFMeasure() > maxMeasure) {
                 maxMeasure = evaluation.weightedFMeasure();
                 k=i;
             }
         }
-        System.out.println("\nEMAITZA -> " + maxMeasure + " ETA K -> " + k);
+        System.out.println("\nEMAITZA -> " + maxMeasure + " ETA K -> " + k+"\n");
     }
 
     private static void datuak_Kargatu(String path) throws Exception {
