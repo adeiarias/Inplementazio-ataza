@@ -1,0 +1,39 @@
+
+Caso actual i,j,z 5,1,3java.lang.ArrayIndexOutOfBoundsException: Index 507 out of bounds for length 501
+	at weka.classifiers.evaluation.Evaluation.updateMargins(Evaluation.java:4499)
+	at weka.classifiers.evaluation.Evaluation.updateStatsForClassifier(Evaluation.java:4268)
+	at weka.classifiers.evaluation.Evaluation.evaluationForSingleInstance(Evaluation.java:1905)
+	at weka.classifiers.evaluation.Evaluation.evaluationForSingleInstance(Evaluation.java:1959)
+	at weka.classifiers.evaluation.Evaluation.evaluateModelOnceAndRecordPrediction(Evaluation.java:1999)
+	at weka.classifiers.evaluation.Evaluation.evaluateModel(Evaluation.java:1874)
+	at weka.classifiers.evaluation.Evaluation.crossValidateModel(Evaluation.java:772)
+	at weka.classifiers.Evaluation.crossValidateModel(Evaluation.java:374)
+	at WEKA.Main.main(Main.java:107)
+
+Caso actual i,j,z 6,1,3java.lang.ArrayIndexOutOfBoundsException
+
+Caso actual i,j,z 7,1,3java.lang.ArrayIndexOutOfBoundsException
+
+Caso actual i,j,z 8,1,3java.lang.ArrayIndexOutOfBoundsException
+
+Caso actual i,j,z 9,1,3java.lang.ArrayIndexOutOfBoundsException
+
+Caso actual i,j,z 10,1,3java.lang.ArrayIndexOutOfBoundsException
+
+Caso actual i,j,z 11,1,3java.lang.ArrayIndexOutOfBoundsException
+
+Caso actual i,j,z 12,1,3java.lang.ArrayIndexOutOfBoundsException
+
+Caso actual i,j,z 13,1,3java.lang.ArrayIndexOutOfBoundsException
+
+Caso actual i,j,z 14,1,3java.lang.ArrayIndexOutOfBoundsException
+
+Caso actual i,j,z 15,1,3java.lang.ArrayIndexOutOfBoundsException
+
+Caso actual i,j,z 16,1,3java.lang.ArrayIndexOutOfBoundsException
+
+Caso actual i,j,z 17,1,3java.lang.ArrayIndexOutOfBoundsException
+
+Caso actual i,j,z 18,1,3java.lang.ArrayIndexOutOfBoundsException
+
+Caso actual i,j,z 19,1,3java.lang.ArrayIndexOutOfBoundsException
