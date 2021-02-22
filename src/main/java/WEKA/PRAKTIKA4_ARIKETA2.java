@@ -46,36 +46,13 @@ public class PRAKTIKA4_ARIKETA2 {
     }
 
     private static void kalitateaEstimatu(Classifier naive) throws Exception {
-        //CROSS VALIDATION
-        Evaluation crossValidation = new Evaluation(data);
-        crossValidation.crossValidateModel(naive,data,10,new Random(1));
-        printWriter.println("CROSS VALIDATION --> ");
-        printWriter.println("ACCURACY -> " + crossValidation.pctCorrect());
-        printWriter.println("CONFUSION MATRIX -> " + crossValidation.toMatrixString() + "\n");
+        //EVALUATE MODEL
 
-        //HOLD-OUT
-        Randomize randomize = new Randomize();
-        randomize.setRandomSeed(1);
-        randomize.setInputFormat(data);
-        Instances random = Filter.useFilter(data,randomize);
-
-        RemovePercentage removePercentageTrain = new RemovePercentage();
-        removePercentageTrain.setInputFormat(random);
-        removePercentageTrain.setInvertSelection(true);
-        removePercentageTrain.setPercentage(70.0);
-        Instances train = Filter.useFilter(random,removePercentageTrain);
-
-        RemovePercentage removePercentageTest = new RemovePercentage();
-        removePercentageTest.setInputFormat(random);
-        removePercentageTest.setInvertSelection(false);
-        removePercentageTest.setPercentage(70.0);
-        Instances test = Filter.useFilter(random,removePercentageTest);
-
-        Evaluation holdOut = new Evaluation(train);
+        /*Evaluation evaluateModel = new Evaluation(train);
         holdOut.evaluateModel(naive,test);
         printWriter.println("HOLD-OUT --> ");
         printWriter.println("ACCURACY -> " + holdOut.pctCorrect());
-        printWriter.println("CONFUSION MATRIX -> " + holdOut.toMatrixString());
+        printWriter.println("CONFUSION MATRIX -> " + holdOut.toMatrixString());*/
     }
 
     private static void datuakKargatu(String arffFtixategia) throws Exception {
