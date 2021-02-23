@@ -2,18 +2,13 @@ package WEKA;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
-import weka.classifiers.bayes.NaiveBayes;
 import weka.core.Instances;
 import weka.core.SerializationHelper;
 import weka.core.converters.ConverterUtils;
-import weka.filters.Filter;
-import weka.filters.unsupervised.instance.Randomize;
-import weka.filters.unsupervised.instance.RemovePercentage;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Date;
-import java.util.Random;
 
 public class PRAKTIKA4_ARIKETA2 {
     private static Instances test;
@@ -40,19 +35,11 @@ public class PRAKTIKA4_ARIKETA2 {
 
     private static void ariketaEgin(String path) throws Exception {
         Classifier naiveBayes = (Classifier)SerializationHelper.read(path);
-        //OBJETUA GORDE
-        SerializationHelper.write(path,naiveBayes);
-        kalitateaEstimatu(naiveBayes);
-    }
-
-    private static void kalitateaEstimatu(Classifier naive) throws Exception {
-        //EVALUATE MODEL
-
-        /*Evaluation evaluateModel = new Evaluation(train);
-        holdOut.evaluateModel(naive,test);
-        printWriter.println("HOLD-OUT --> ");
-        printWriter.println("ACCURACY -> " + holdOut.pctCorrect());
-        printWriter.println("CONFUSION MATRIX -> " + holdOut.toMatrixString());*/
+        Evaluation eval = new Evaluation(test);
+        eval.evaluateModel(naiveBayes,test);
+        printWriter.println("TEST-AK EBALUATU --> ");
+        printWriter.println("ACCURACY -> " + eval.pctCorrect());
+        printWriter.println("CONFUSION MATRIX -> " + eval.toMatrixString());
     }
 
     private static void datuakKargatu(String arffFtixategia) throws Exception {
