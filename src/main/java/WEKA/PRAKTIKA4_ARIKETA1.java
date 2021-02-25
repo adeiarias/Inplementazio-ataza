@@ -21,7 +21,7 @@ public class PRAKTIKA4_ARIKETA1 {
     private static PrintWriter printWriter;
 
     public static void main(String[] args) throws Exception {
-        if(args.length == 3) {
+        if(args.length != 3) {
             System.out.println("EZ DITUZU BEHAR DIREN PARAMETROAK SARTU");
             System.out.println("HURRENGO MODUAN JARRI BEHARKO DUZU:");
             System.out.println("java -jar EreduaSortu.jar  /paht/to/data.arff  /paht/to/irteerako/karpeta/NB.model  /paht/to/irteerako/karpeta/KalitatearenEstimazioa.txt");

@@ -20,7 +20,7 @@ public class PRAKTIKA4_ARIKETA2 {
     private static PrintWriter printWriter;
 
     public static void main(String[] args) throws Exception {
-        if(args.length == 3) {
+        if(args.length != 3) {
             System.out.println("EZ DITUZU BEHAR DIREN PARAMETROAK SARTU");
             System.out.println("HURRENGO MODUAN JARRI BEHARKO DUZU:");
             System.out.println("java -jar IragarpenakEgin.jar  /paht/to/karpeta/NB.model  /paht/to/test_blind.arff  /paht/to/irteerako/karpeta/test_predictions.txt");
